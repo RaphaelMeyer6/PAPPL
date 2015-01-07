@@ -18,8 +18,9 @@ public class PAPPL {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        int hauteur=500;
-        int largeur=400;
+        long debut = System.currentTimeMillis();
+        int hauteur=3000;
+        int largeur=3000;
         Grille G = new Grille(largeur,hauteur);
         for (int y=0;y<hauteur;y++){
             for (int x=0;x<largeur;x++){
@@ -48,5 +49,8 @@ public class PAPPL {
         for (Maille m :maillesVersantes ){
             System.out.println(m);
         }*/
+        long fin = System.currentTimeMillis();
+    System.out.println("Exécuté en "+ (fin-debut)/1000 +" s");
 }
+    
 }
