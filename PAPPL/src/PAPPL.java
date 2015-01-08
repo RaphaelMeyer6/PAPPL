@@ -19,8 +19,8 @@ public class PAPPL {
     public static void main(String[] args) {
         // TODO code application logic here
         long debut = System.currentTimeMillis();
-        int hauteur=4;
-        int largeur=4;
+        int hauteur=6;
+        int largeur=6;
         Grille G = new Grille(largeur,hauteur);
         for (int y=0;y<hauteur;y++){
             for (int x=0;x<largeur;x++){
@@ -30,18 +30,11 @@ public class PAPPL {
                 Maille M=new Maille(P,valeur,G);
             }
         }
-        G.getMaillage()[1][1].setAltitude(0);
         Graph graphique=new Graph(largeur,hauteur,G,0);
         G.calculDirection();
-        //System.out.println(G.getMaillage()[40][300].getDirection());
         Graph graph2=new Graph(largeur,hauteur,G,1);
-        LinkedList<Maille> maillesVersantes = new LinkedList<>();
-        maillesVersantes=G.calculVersantes(G.getMaillage()[1][1]);
-        G.getMaillage()[1][1].setMaillesDeversees(maillesVersantes.size()-1);
-        for (Maille m :maillesVersantes ){
-            System.out.println(m);
-        }
-        System.out.println(G.getMaillage()[1][1].getMaillesDeversees());
+        G.appelCalculVersantes();
+        Graph graph3=new Graph(largeur,hauteur,G,2);
         long fin = System.currentTimeMillis();
     System.out.println("Exécuté en "+ (fin-debut)/1000 +" s");
 }

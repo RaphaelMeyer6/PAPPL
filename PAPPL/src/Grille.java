@@ -67,7 +67,6 @@ public class Grille {
 
                 if (!horsGrille(abs + k, ord + l)) {
                     liste_mailles.add(maillage[abs + k][ord + l]);
-                    //System.out.println(maillage[i + k][j + l]);
                 }
             }
         }
@@ -119,11 +118,8 @@ public class Grille {
                 LinkedList<Maille> liste_mailles = new LinkedList<>();
                 liste_mailles = raster(maillage[i][j]);
                 Collections.sort(liste_mailles);
-                //System.out.println(liste_mailles.get(0).getAltitude());
-                //System.out.println(liste_mailles.get(1).getAltitude());
                 int diff_abscisse = liste_mailles.get(0).getPosition().getAbscisse() - i;
                 int diff_ordonnee = liste_mailles.get(0).getPosition().getOrdonnee() - j;
-                //System.out.println("Maille (" + i + "," + j + "), valeurs : " + diff_abscisse + " " + diff_ordonnee);
                 if (diff_abscisse == 0 && diff_ordonnee == 0) {
                     maillage[i][j].setDirection("X");
                 } else if (diff_abscisse == 1 && diff_ordonnee == 1) {
@@ -163,6 +159,7 @@ public class Grille {
         do {
             // Lancement du calcul des mailles versantes sur les mailles contenues dans la liste
             maillesVersantes=rasterVersantes(maillesVersantes);
+            traites=0;
             //Compte le nombre de mailles traitées
             for (Maille m : maillesVersantes) {
                 if (m.getTraitee()) {
@@ -174,6 +171,18 @@ public class Grille {
                 termine = true;
             }
         } while (!termine);
+        for (Maille m:maillesVersantes){
+            m.setTraitee(false);
+            M.setMaillesDeversees(maillesVersantes.size()-1);
+        }
         return maillesVersantes;
     }
+    
+   public void appelCalculVersantes(){
+       for (int j = 0; j < hauteur; j++) {
+            for (int i = 0; i < largeur; i++) {
+                calculVersantes(maillage[i][j]);
+            }
+       }
+   }
 }

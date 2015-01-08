@@ -15,6 +15,7 @@ public class Maille implements Comparable {
     private Grille grille;
     private String direction;
     private boolean traitee;
+    private int maillesDeversees;
 
     public Maille() {
         this.altitude = 0;
@@ -51,6 +52,12 @@ public class Maille implements Comparable {
     }
     public boolean getTraitee(){
         return traitee;
+    }
+    public void setMaillesDeversees(int i){
+        maillesDeversees=i;
+    }
+    public int getMaillesDeversees(){
+        return maillesDeversees;
     }
     public void setDirection(String S) {
         direction = S;

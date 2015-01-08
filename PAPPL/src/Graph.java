@@ -18,22 +18,32 @@ public class Graph {
     public Graph(int largeur, int hauteur, Grille G, int param) {
         this.largeur = largeur;
         this.hauteur = hauteur;
-        JFrame frame = new JFrame("Maillage");
+        JFrame frame = new JFrame("Altitudes");
+        switch (param) {
+            case 1:
+                frame.setTitle("Directions");
+                break;
+            case 2:
+                frame.setTitle("Mailles déversantes");
+                break;
+        }
         JPanel panneau = new JPanel();
         GridLayout gestionnaire = new GridLayout(hauteur, largeur);
         panneau.setLayout(gestionnaire);
         for (int y = 0; y < hauteur; y++) {
             for (int x = 0; x < largeur; x++) {
-                if (param == 0) {
-                    JButton label = new JButton(Integer.toString(G.getMaillage()[x][y].getAltitude()));
-                    panneau.add(label);
-                    System.out.println("x,y vaut: "+x+","+y);
-                    System.out.println("abs,ord: " +G.getMaillage()[x][y].getPosition().getAbscisse()+","+G.getMaillage()[x][y].getPosition().getOrdonnee());
-                    System.out.println("altitude: " + G.getMaillage()[x][y].getAltitude());
-                } else {
-                    JButton label = new JButton(G.getMaillage()[x][y].getDirection());
-                    panneau.add(label);
+                switch (param) {
+                    case 0:
+                        panneau.add(new JButton(Integer.toString(G.getMaillage()[x][y].getAltitude())));
+                        break;
+                    case 1:
+                        panneau.add(new JButton(G.getMaillage()[x][y].getDirection()));
+                        break;
+                    case 2:
+                        panneau.add(new JButton(Integer.toString(G.getMaillage()[x][y].getMaillesDeversees())));
+                        break;
                 }
+
             }
         }
         frame.setContentPane(panneau);
