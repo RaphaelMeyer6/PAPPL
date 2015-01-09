@@ -26,6 +26,9 @@ public class Graph {
             case 2:
                 frame.setTitle("Mailles déversantes");
                 break;
+            case 3:
+                frame.setTitle("Bassins d'accumulation");
+                break;
         }
         JPanel panneau = new JPanel();
         GridLayout gestionnaire = new GridLayout(hauteur, largeur);
@@ -34,7 +37,7 @@ public class Graph {
             for (int x = 0; x < largeur; x++) {
                 switch (param) {
                     case 0:
-                        panneau.add(new JButton(Integer.toString(G.getMaillage()[x][y].getAltitude())));
+                        panneau.add(new JButton(Double.toString(G.getMaillage()[x][y].getAltitude())));
                         break;
                     case 1:
                         panneau.add(new JButton(G.getMaillage()[x][y].getDirection()));
@@ -42,13 +45,23 @@ public class Graph {
                     case 2:
                         panneau.add(new JButton(Integer.toString(G.getMaillage()[x][y].getMaillesDeversees())));
                         break;
+                    case 3:
+                        JButton bouton = new JButton();
+                        if (G.getMaillage()[x][y].getEstBassin()) {
+                            bouton.setBackground(Color.BLUE);
+                        } else {
+                            bouton.setBackground(Color.WHITE);
+                        }
+                        bouton.setOpaque(true);
+                        panneau.add(bouton);
+                        break;
                 }
 
             }
         }
         frame.setContentPane(panneau);
-        //frame.setSize(640, 480);
-        frame.pack();
+        frame.setSize(1024, 768);
+        //frame.pack();
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

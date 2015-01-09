@@ -7,27 +7,32 @@
  *
  * @author Raphael
  */
-import java.util.ArrayList;
+
 public class Maille implements Comparable {
 
     private Point2D position;
-    private int altitude;
+    private double altitude;
     private Grille grille;
     private String direction;
     private boolean traitee;
     private int maillesDeversees;
+    private boolean estMaxima;
+    private boolean estBassin;
 
     public Maille() {
         this.altitude = 0;
         traitee=false;
     }
 
-    public Maille(Point2D P, int altitude, Grille G) {
+    public Maille(Point2D P, double altitude, Grille G) {
         position = P;
         this.altitude = altitude;
         this.grille = G;
         G.ajouterMaille(this, position.getAbscisse(), position.getOrdonnee());
         traitee=false;
+        maillesDeversees=0;
+        estMaxima=false;
+        estBassin=false;    
     }
 
     public int compareTo(Object O) {
@@ -52,6 +57,18 @@ public class Maille implements Comparable {
     }
     public boolean getTraitee(){
         return traitee;
+    }
+    public void setEstMaxima(boolean B){
+        estMaxima=B;
+    }
+    public boolean getEstMaxima(){
+        return estMaxima;
+    }
+    public void setEstBassin(boolean B){
+        estBassin=B;
+    }
+    public boolean getEstBassin(){
+        return estBassin;
     }
     public void setMaillesDeversees(int i){
         maillesDeversees=i;
@@ -79,27 +96,17 @@ public class Maille implements Comparable {
         this.position = P;
     }
 
-    public int getAltitude() {
+    public double getAltitude() {
         return altitude;
     }
 
-    public void setAltitude(int altitude) {
+    public void setAltitude(double altitude) {
         this.altitude = altitude;
     }
 
     public String toString() {
         String res = "Maille en position " + position + " et d'altitude " + altitude;
         return res;
-    }
-
-    public boolean horsGrille() {
-        if (this.position.getAbscisse() < 0 || this.position.getOrdonnee() < 0
-                || this.position.getAbscisse() >= grille.getLargeur() || this.position.getOrdonnee() >= grille.getHauteur()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
+    }   
 
 }

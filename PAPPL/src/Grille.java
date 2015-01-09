@@ -7,7 +7,6 @@
  *
  * @author Raphael
  */
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.ListIterator;
@@ -158,8 +157,8 @@ public class Grille {
         boolean termine = false;
         do {
             // Lancement du calcul des mailles versantes sur les mailles contenues dans la liste
-            maillesVersantes=rasterVersantes(maillesVersantes);
-            traites=0;
+            maillesVersantes = rasterVersantes(maillesVersantes);
+            traites = 0;
             //Compte le nombre de mailles traitées
             for (Maille m : maillesVersantes) {
                 if (m.getTraitee()) {
@@ -171,18 +170,44 @@ public class Grille {
                 termine = true;
             }
         } while (!termine);
-        for (Maille m:maillesVersantes){
+        for (Maille m : maillesVersantes) {
             m.setTraitee(false);
-            M.setMaillesDeversees(maillesVersantes.size()-1);
+            M.setMaillesDeversees(maillesVersantes.size() - 1);
         }
         return maillesVersantes;
     }
-    
-   public void appelCalculVersantes(){
-       for (int j = 0; j < hauteur; j++) {
+
+    public void appelCalculVersantes() {
+        for (int j = 0; j < hauteur; j++) {
             for (int i = 0; i < largeur; i++) {
                 calculVersantes(maillage[i][j]);
             }
-       }
-   }
+        }
+    }
+
+    public void MaximaLocaux() {
+        for (int j = 0; j < hauteur; j++) {
+            for (int i = 0; i < largeur; i++) {
+                int compteur = 0;
+                LinkedList<Maille> raster = raster(maillage[i][j]);
+                for (Maille m : raster) {
+                    if (m.getMaillesDeversees() <= maillage[i][j].getMaillesDeversees()) {
+                        compteur++;
+                    }
+                }
+                if (compteur==raster.size()){
+                    maillage[i][j].setEstMaxima(true);
+                }
+            }
+
+        }
+    }
+    public void trouveBassins(int accumulation){
+        for (int j = 0; j < hauteur; j++) {
+            for (int i = 0; i < largeur; i++) {
+                if (maillage[i][j].getMaillesDeversees()>accumulation){
+                    maillage[i][j].setEstBassin(true);
+                }
+            }
+    }}
 }
