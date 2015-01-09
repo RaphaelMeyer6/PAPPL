@@ -12,6 +12,7 @@ public class Maille implements Comparable {
 
     private Point2D position;
     private double altitude;
+    private double maximum_drop;
     private Grille grille;
     private String direction;
     private boolean traitee;
@@ -32,7 +33,8 @@ public class Maille implements Comparable {
         traitee=false;
         maillesDeversees=0;
         estMaxima=false;
-        estBassin=false;    
+        estBassin=false; 
+        maximum_drop=0;
     }
 
     public int compareTo(Object O) {
@@ -40,12 +42,12 @@ public class Maille implements Comparable {
         if (O==null){
             throw new NullPointerException();
         }
-        if (altitude == M.getAltitude()) {
+        if (maximum_drop == M.getMaximumDrop()) {
             return 0;
-        } else if (altitude < M.getAltitude()) {
-            return -1;
-        } else {
+        } else if (maximum_drop < M.getMaximumDrop()) {
             return 1;
+        } else {
+            return -1;
         }
     }
 
@@ -102,6 +104,14 @@ public class Maille implements Comparable {
 
     public void setAltitude(double altitude) {
         this.altitude = altitude;
+    }
+    public double getMaximumDrop() {
+        return maximum_drop;
+    }
+
+    public void calculMaximumDrop(double alt, double facteur)
+    {
+        maximum_drop=(alt-altitude)/facteur;
     }
 
     public String toString() {

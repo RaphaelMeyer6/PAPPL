@@ -61,10 +61,18 @@ public class Grille {
         LinkedList<Maille> liste_mailles = new LinkedList<>();
         int abs = M.getPosition().getAbscisse();
         int ord = M.getPosition().getOrdonnee();
+        double altitude=M.getAltitude();
         for (int k = -1; k < 2; k++) {
             for (int l = -1; l < 2; l++) {
 
                 if (!horsGrille(abs + k, ord + l)) {
+                    if (k*l!=0){
+                      maillage[abs+k][ord+l].calculMaximumDrop(altitude,Math.sqrt(2));  
+                    }
+                    else {
+                        maillage[abs+k][ord+l].calculMaximumDrop(altitude,1);
+                    }
+                    
                     liste_mailles.add(maillage[abs + k][ord + l]);
                 }
             }
@@ -113,7 +121,6 @@ public class Grille {
         //parcours de la grille via les indices i et j
         for (int j = 0; j < hauteur; j++) {
             for (int i = 0; i < largeur; i++) {
-                boolean altitude_egales = true;
                 LinkedList<Maille> liste_mailles = new LinkedList<>();
                 liste_mailles = raster(maillage[i][j]);
                 Collections.sort(liste_mailles);
