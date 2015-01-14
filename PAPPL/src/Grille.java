@@ -59,8 +59,8 @@ public class Grille {
 
     public LinkedList<Maille> raster(Maille M) {
         LinkedList<Maille> liste_mailles = new LinkedList<>();
-        int abs = M.getPosition().getAbscisse();
-        int ord = M.getPosition().getOrdonnee();
+        int abs = (int)M.getPosition().getAbscisse();
+        int ord = (int)M.getPosition().getOrdonnee();
         double altitude=M.getAltitude();
         for (int k = -1; k < 2; k++) {
             for (int l = -1; l < 2; l++) {
@@ -85,8 +85,8 @@ public class Grille {
         while (iterator.hasNext()) {
             Maille m = iterator.next();
             if (!m.getTraitee()) {
-                int abs = m.getPosition().getAbscisse();
-                int ord = m.getPosition().getOrdonnee();
+                int abs = (int)m.getPosition().getAbscisse();
+                int ord = (int)m.getPosition().getOrdonnee();
                 m.setTraitee(true);
                 for (int k = -1; k < 2; k++) {
                     for (int l = -1; l < 2; l++) {
@@ -124,8 +124,8 @@ public class Grille {
                 LinkedList<Maille> liste_mailles = new LinkedList<>();
                 liste_mailles = raster(maillage[i][j]);
                 Collections.sort(liste_mailles);
-                int diff_abscisse = liste_mailles.get(0).getPosition().getAbscisse() - i;
-                int diff_ordonnee = liste_mailles.get(0).getPosition().getOrdonnee() - j;
+                int diff_abscisse = (int)liste_mailles.get(0).getPosition().getAbscisse() - i;
+                int diff_ordonnee = (int)liste_mailles.get(0).getPosition().getOrdonnee() - j;
                 if (diff_abscisse == 0 && diff_ordonnee == 0) {
                     maillage[i][j].setDirection("X");
                 } else if (diff_abscisse == 1 && diff_ordonnee == 1) {

@@ -7,35 +7,44 @@
  *
  * @author Raphael
  */
-public class Point2D {
-    private int abscisse;
-    private int ordonnee;
+public class Point3D {
+    private double abscisse;
+    private double ordonnee;
+    private double altitude;
 /*
     @param x l'abcisse du podouble
     @param y l'ordonnee du podouble
     */
-   public Point2D(int x,int y){
+   public Point3D(double x,double y,double z){
        this.abscisse=x;
        this.ordonnee=y;
+       this.altitude=z;
    }
-   public Point2D(Point2D A){
+   public Point3D(Point3D A){
        this.abscisse=A.getAbscisse();
        this.ordonnee=A.getOrdonnee();
+       this.altitude=A.getAltitude();
    }
-   public int getAbscisse(){
+   public double getAbscisse(){
        return abscisse;
    }
-   public int getOrdonnee(){
+   public double getOrdonnee(){
        return ordonnee;
    }
-   public void setAbscisse(int x){
+   public void setAbscisse(double x){
        this.abscisse=x;
    }
-   public void setOrdonnee(int y){
+   public void setOrdonnee(double y){
        this.ordonnee=y;
    }
+   public void setAltitude(double z){
+       this.altitude=z;
+   }
+   public double getAltitude(){
+       return altitude;
+   }
    public String toString(){
-       String res= "("+abscisse+","+ordonnee+")";
+       String res= "("+abscisse+","+ordonnee+","+altitude+")";
        return res;
    }
 }

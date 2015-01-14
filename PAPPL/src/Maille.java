@@ -21,7 +21,7 @@ public class Maille implements Comparable {
     private boolean estBassin;
 
     public Maille() {
-        this.altitude = 0;
+        this.altitude = Double.NaN;
         traitee=false;
     }
 
@@ -29,7 +29,7 @@ public class Maille implements Comparable {
         position = P;
         this.altitude = altitude;
         this.grille = G;
-        G.ajouterMaille(this, position.getAbscisse(), position.getOrdonnee());
+        G.ajouterMaille(this, (int)position.getAbscisse(), (int)position.getOrdonnee());
         traitee=false;
         maillesDeversees=0;
         estMaxima=false;
