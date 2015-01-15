@@ -20,8 +20,8 @@ public class PAPPL {
         Point3D B=new Point3D(10,0,2);
         Point3D C=new Point3D(5,5,20);
         Triangle T=new Triangle(A,B,C);
-        Point2D P=new Point2D(-5,1);
-        System.out.println(T.Barycentre2D());
+        Point2D P=new Point2D(9,1);
+        T.pointInclus(P);
 //long debut = System.currentTimeMillis();
         /*DBconnexion con = new DBconnexion("localhost/PAPPL", "postgres", "root");
         LinkedList<String> resultat;
