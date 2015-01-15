@@ -84,15 +84,18 @@ public class Triangle {
             //Droite AB
             double a = (B.getOrdonnee() - A.getOrdonnee()) / (B.getAbscisse() - A.getAbscisse());
             double b = A.getOrdonnee() - a * A.getAbscisse();
-            if (Math.signum(P.getOrdonnee() - a * P.getAbscisse() - b) == Math.signum(G.getOrdonnee() - a * G.getAbscisse() - b)) {
+            if (Math.signum(P.getOrdonnee() - a * P.getAbscisse() - b)*Math.signum(G.getOrdonnee() - a * G.getAbscisse() - b)==1 ||
+                Math.signum(P.getOrdonnee() - a * P.getAbscisse() - b)*Math.signum(G.getOrdonnee() - a * G.getAbscisse() - b)==0) {
                 //Droite BC
                 a = (C.getOrdonnee() - B.getOrdonnee()) / (C.getAbscisse() - B.getAbscisse());
                 b = C.getOrdonnee() - a * C.getAbscisse();
-                if (Math.signum(P.getOrdonnee() - a * P.getAbscisse() - b) == Math.signum(G.getOrdonnee() - a * G.getAbscisse() - b)) {
+                if (Math.signum(P.getOrdonnee() - a * P.getAbscisse() - b)*Math.signum(G.getOrdonnee() - a * G.getAbscisse() - b)==1 ||
+                Math.signum(P.getOrdonnee() - a * P.getAbscisse() - b)*Math.signum(G.getOrdonnee() - a * G.getAbscisse() - b)==0)  {
                     //Droite AC
                     a = (C.getOrdonnee() - A.getOrdonnee()) / (C.getAbscisse() - A.getAbscisse());
-                    b = C.getOrdonnee() - a * A.getAbscisse();
-                    if (Math.signum(P.getOrdonnee() - a * P.getAbscisse() - b) == Math.signum(G.getOrdonnee() - a * G.getAbscisse() - b)) {
+                    b = A.getOrdonnee() - a * A.getAbscisse();
+                    if (Math.signum(P.getOrdonnee() - a * P.getAbscisse() - b)*Math.signum(G.getOrdonnee() - a * G.getAbscisse() - b)==1 ||
+                Math.signum(P.getOrdonnee() - a * P.getAbscisse() - b)*Math.signum(G.getOrdonnee() - a * G.getAbscisse() - b)==0)  {
                     this.point_inclus.add(P);
                     }
                 }
@@ -101,12 +104,12 @@ public class Triangle {
     }
 
     public double InterpolationAltitude(Point2D P) {
-        double xn = (B.getOrdonnee() - A.getOrdonnee()) * (C.getAltitude() - A.getAltitude()) - (C.getOrdonnee() - A.getOrdonnee()) * (B.getAltitude() - A.getAltitude());
-        double yn = (C.getAbscisse() - A.getAbscisse()) * (B.getAltitude() - A.getAltitude()) - (B.getAbscisse() - A.getAbscisse()) * (C.getAltitude() - A.getAltitude());
-        double zn = (B.getAbscisse() - A.getAbscisse()) * (C.getOrdonnee() - A.getOrdonnee()) - (C.getAbscisse() - A.getAbscisse()) * (B.getOrdonnee() - A.getOrdonnee());
-        double altitude = (A.getAbscisse() * xn + A.getOrdonnee() * yn + A.getAltitude() * zn - P.getAbscisse() * xn - P.getOrdonnee() * yn) / zn;
+        double[] vecteur = A.pVectoriel(B, C);
+        double altitude;
+        altitude=(vecteur[0]*(A.getAbscisse()-P.getAbscisse())+vecteur[1]*(A.getOrdonnee()-P.getOrdonnee()))/vecteur[2]+A.getAltitude();
         return altitude;
     }
+
 
     public String toString() {
         String res = A.toString() + "\n" + B.toString() + "\n" + C.toString();

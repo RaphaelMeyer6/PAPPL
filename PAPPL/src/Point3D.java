@@ -47,4 +47,17 @@ public class Point3D {
        String res= "("+abscisse+","+ordonnee+","+altitude+")";
        return res;
    }
+   public double[] pVectoriel(Point3D B, Point3D C){
+       double[] vecteur = new double[3];
+       double x1=B.getAbscisse()-this.getAbscisse();
+       double y1=B.getOrdonnee()-this.getOrdonnee();
+       double z1=B.getAltitude()-this.getAltitude();
+       double x2=C.getAbscisse()-this.getAbscisse();
+       double y2=C.getOrdonnee()-this.getOrdonnee();
+       double z2=C.getAltitude()-this.getAltitude();
+       vecteur[0]=y1*z2-y2*z1;
+       vecteur[1]=x2*z1-x1*z2;
+       vecteur[2]=x1*y2-x2*y1;
+       return vecteur;
+   }
 }

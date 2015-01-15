@@ -16,12 +16,18 @@ public class PAPPL {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Point3D A=new Point3D(0,0,25);
-        Point3D B=new Point3D(10,0,2);
+        Point3D A=new Point3D(0,0,21);
+        Point3D B=new Point3D(10,0,20);
         Point3D C=new Point3D(5,5,20);
         Triangle T=new Triangle(A,B,C);
-        Point2D P=new Point2D(9,1);
+        Point2D P=new Point2D(3,3);
+        Point2D P1=new Point2D(3,3);
         T.pointInclus(P);
+        T.pointInclus(P1);
+        for (Point2D p:T.getPointInclus()){
+            System.out.println(p);
+        }
+        System.out.println(T.InterpolationAltitude(P));
 //long debut = System.currentTimeMillis();
         /*DBconnexion con = new DBconnexion("localhost/PAPPL", "postgres", "root");
         LinkedList<String> resultat;
