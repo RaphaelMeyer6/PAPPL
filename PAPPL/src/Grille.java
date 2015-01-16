@@ -21,13 +21,14 @@ public class Grille {
      @param l la hauteur de la grille
      */
 
-    public Grille(int l, int h) {
+    public Grille(int l, int h, int pas) {
         this.largeur = l;
         this.hauteur = h;
         maillage = new Maille[largeur][hauteur];
-        Maille M = new Maille();
         for (int y = 0; y < hauteur; y++) {
             for (int x = 0; x < largeur; x++) {
+                Point2D P=new Point2D((2*x-largeur)*pas/2,(2*y)-hauteur*pas/2);
+                Maille M = new Maille();
                 maillage[x][y] = M;
             }
         }
