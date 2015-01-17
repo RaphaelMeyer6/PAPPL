@@ -16,40 +16,33 @@ public class PAPPL {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Point3D A=new Point3D(0,0,21);
-        Point3D B=new Point3D(10,0,20);
-        Point3D C=new Point3D(5,5,20);
-        Triangle T=new Triangle(A,B,C);
-        Point2D P=new Point2D(3,3);
-        Point2D P1=new Point2D(3,3);
+        /*Point3D P1=new Point3D(0,0,0);
+        Point3D P2=new Point3D(10,0,0);
+        Point3D P3=new Point3D(5,5,0);
+        Triangle T=new Triangle(P1,P2,P3);
+        Point2D P=new Point2D(0,0);
         T.pointInclus(P);
-        T.pointInclus(P1);
         for (Point2D p:T.getPointInclus()){
             System.out.println(p);
-        }
-        System.out.println(T.InterpolationAltitude(P));
-//long debut = System.currentTimeMillis();
-        /*DBconnexion con = new DBconnexion("localhost/PAPPL", "postgres", "root");
+        }*/
+        long debut = System.currentTimeMillis();  
+        DBconnexion con = new DBconnexion("localhost/PAPPL", "postgres", "root");
         LinkedList<String> resultat;
+        int pas=500;
         //Calcul de la taille du maillage à créer pour couvrir le maillage de Delaunay
         resultat = con.lancerRequete("SELECT min(ST_Xmin(thegeom)) FROM decoupage;");
         double min = Math.ceil(Math.abs((Double.parseDouble(resultat.getFirst()))));
         resultat = con.lancerRequete("SELECT max(ST_Xmax(thegeom)) FROM decoupage;");
         double max = Math.ceil(Math.abs((Double.parseDouble(resultat.getFirst()))));
         double largeur = Math.max(min, max);
+        int largeur_grille = 2*(int)largeur/pas+1;
         resultat = con.lancerRequete("SELECT min(ST_Ymin(thegeom)) FROM decoupage;");
         min = Math.ceil(Math.abs((Double.parseDouble(resultat.getFirst()))));
         resultat = con.lancerRequete("SELECT max(ST_Ymax(thegeom)) FROM decoupage;");
         max = Math.ceil(Math.abs((Double.parseDouble(resultat.getFirst()))));
         double hauteur = Math.max(min, max);
-
-        Grille G = new Grille((int) largeur, (int) hauteur);
-        for (int y = 0; y < hauteur; y++) {
-            for (int x = 0; x < largeur; x++) {
-                Point2D P = new Point2D(x, y);
-                Maille M = new Maille(P, Double.NaN, G);
-            }
-        }
+        int hauteur_grille = 2*(int)hauteur/pas+1;
+        Grille G = new Grille(largeur_grille,hauteur_grille,pas);
         resultat = con.lancerRequete("SELECT ST_asText(thegeom) from decoupage;");
         Delaunay delaunay = new Delaunay();
         for (String str : resultat) {
@@ -57,26 +50,22 @@ public class PAPPL {
             delaunay.ajouterTriangle(T);
             T.setGeometry(str);
             T.parseGeometry();
-        }
-        int t=1;
+        }  
         for (Triangle T : delaunay.getListeTriangles()) {
-            for (int y = 0; y < hauteur; y++) {
-                for (int x = 0; x < largeur; x++) {
+            for (int y = 0; y < hauteur_grille; y++) {
+                for (int x = 0; x < largeur_grille; x++) {
                     T.pointInclus(G.getMaillage()[x][y].getPosition());
                 }
-
             }
-            t++;
-            System.out.println("Triangle "+t);
         }
         for (Triangle T:delaunay.getListeTriangles()){
             for (Point2D P:T.getPointInclus()){
                 double altitude =T.InterpolationAltitude(P);
-                G.getMaillage()[P.getAbscisse()][P.getOrdonnee()].setAltitude(altitude);
+                G.getMaillage()[P.getAbs_grille()][P.getOrd_grille()].setAltitude(altitude);
             }
         }
-        /*Graph graphique=new Graph(largeur,hauteur,G,0);
-         G.calculDirection();
+        Graph graphique=new Graph(largeur_grille,hauteur_grille,G,0);
+         /*G.calculDirection();
          Graph graph2=new Graph(largeur,hauteur,G,1);
          G.appelCalculVersantes();
          Graph graph3=new Graph(largeur,hauteur,G,2);
@@ -90,6 +79,8 @@ public class PAPPL {
         System.out.println("fini");
         con.DBdisconnect();
     */
-    
+    long fin = System.currentTimeMillis();
+    long total = (fin - debut);
+    System.out.println("Exécuté en " + total + " ms");
     }
 }

@@ -29,7 +29,7 @@ public class Maille implements Comparable {
         position = P;
         this.altitude = altitude;
         this.grille = G;
-        G.ajouterMaille(this, (int)position.getAbscisse(), (int)position.getOrdonnee());
+        //G.ajouterMaille(this, (int)position.getAbscisse()+G.getLargeur()*200, (int)position.getOrdonnee()+G.getHauteur()/2);
         traitee=false;
         maillesDeversees=0;
         estMaxima=false;

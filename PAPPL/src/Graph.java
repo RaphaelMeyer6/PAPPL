@@ -31,10 +31,10 @@ public class Graph {
                 break;
         }
         JPanel panneau = new JPanel();
-        GridLayout gestionnaire = new GridLayout(hauteur, largeur);
+        GridLayout gestionnaire = new GridLayout(this.hauteur, this.largeur);
         panneau.setLayout(gestionnaire);
-        for (int y = 0; y < hauteur; y++) {
-            for (int x = 0; x < largeur; x++) {
+        for (int y = 0; y < this.hauteur; y++) {
+            for (int x = 0; x < this.largeur; x++) {
                 switch (param) {
                     case 0:
                         panneau.add(new JButton(Double.toString(G.getMaillage()[x][y].getAltitude())));
@@ -60,8 +60,8 @@ public class Graph {
             }
         }
         frame.setContentPane(panneau);
-        frame.setSize(1024, 768);
-        //frame.pack();
+        //frame.setSize(1366, 768);
+        frame.pack();
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

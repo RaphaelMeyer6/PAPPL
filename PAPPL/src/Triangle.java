@@ -67,9 +67,9 @@ public class Triangle {
     public double[] BoiteEnglobante() {
         double[] boiteEnglobante = new double[4];
         boiteEnglobante[0] = (Math.min(A.getAbscisse(), Math.min(B.getAbscisse(), C.getAbscisse())));
-        boiteEnglobante[0] = (Math.max(A.getAbscisse(), Math.max(B.getAbscisse(), C.getAbscisse())));
-        boiteEnglobante[0] = (Math.min(A.getOrdonnee(), Math.min(B.getOrdonnee(), C.getOrdonnee())));
-        boiteEnglobante[0] = (Math.max(A.getOrdonnee(), Math.max(B.getOrdonnee(), C.getOrdonnee())));
+        boiteEnglobante[1] = (Math.max(A.getAbscisse(), Math.max(B.getAbscisse(), C.getAbscisse())));
+        boiteEnglobante[2] = (Math.min(A.getOrdonnee(), Math.min(B.getOrdonnee(), C.getOrdonnee())));
+        boiteEnglobante[3] = (Math.max(A.getOrdonnee(), Math.max(B.getOrdonnee(), C.getOrdonnee())));
         return boiteEnglobante;
     }
 
