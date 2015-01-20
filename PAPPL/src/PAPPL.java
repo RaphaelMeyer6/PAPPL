@@ -16,14 +16,18 @@ public class PAPPL {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        /*Point3D P1=new Point3D(0,0,0);
-        Point3D P2=new Point3D(10,0,0);
-        Point3D P3=new Point3D(5,5,0);
-        Triangle T=new Triangle(P1,P2,P3);
-        Point2D P=new Point2D(0,0);
-        T.pointInclus(P);
-        for (Point2D p:T.getPointInclus()){
-            System.out.println(p);
+        /*Point3D P=new Point3D(0,-4000,50);
+        Point3D P1=new Point3D(4000,-4000,60);
+        Point3D P2=new Point3D(0,0,40);
+        Triangle T=new Triangle(P,P1,P2);
+        Point2D p2D =new Point2D(100,-4000);
+        Maille M = new Maille();
+        M.setPosition(p2D);
+        T.pointInclus(p2D);
+        if (T.getPointInclus().size()!=0){
+        M.setAltitude(T.InterpolationAltitude(p2D));
+        System.out.println(T.getPointInclus().getFirst());
+        System.out.println(M.getAltitude());
         }*/
         long debut = System.currentTimeMillis();  
         DBconnexion con = new DBconnexion("localhost/PAPPL", "postgres", "root");
@@ -55,7 +59,7 @@ public class PAPPL {
             for (int y = 0; y < hauteur_grille; y++) {
                 for (int x = 0; x < largeur_grille; x++) {
                     T.pointInclus(G.getMaillage()[x][y].getPosition());
-                }
+                    }
             }
         }
         for (Triangle T:delaunay.getListeTriangles()){
@@ -64,23 +68,18 @@ public class PAPPL {
                 G.getMaillage()[P.getAbs_grille()][P.getOrd_grille()].setAltitude(altitude);
             }
         }
-        Graph graphique=new Graph(largeur_grille,hauteur_grille,G,0);
-         /*G.calculDirection();
-         Graph graph2=new Graph(largeur,hauteur,G,1);
+         Graph graphique=new Graph(largeur_grille,hauteur_grille,G,0);
+         G.calculDirection();
+         Graph graph2=new Graph(largeur_grille,hauteur_grille,G,1);
          G.appelCalculVersantes();
-         Graph graph3=new Graph(largeur,hauteur,G,2);
+         Graph graph3=new Graph(largeur_grille,hauteur_grille,G,2);
          G.trouveBassins(10);
-         Graph graph4=new Graph(largeur,hauteur,G,3);
-         
-
-            //long fin = System.currentTimeMillis();
-        //long total = (fin - debut);
-        //System.out.println("Exécuté en " + total + " ms");
+         Graph graph4=new Graph(largeur_grille,hauteur_grille,G,3);
         System.out.println("fini");
         con.DBdisconnect();
-    */
+    
     long fin = System.currentTimeMillis();
     long total = (fin - debut);
-    System.out.println("Exécuté en " + total + " ms");
+    System.out.println("Exécuté en " + total + " ms");          
     }
 }

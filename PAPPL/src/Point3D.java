@@ -11,19 +11,15 @@ public class Point3D {
     private double abscisse;
     private double ordonnee;
     private double altitude;
-/*
-    @param x l'abcisse du podouble
-    @param y l'ordonnee du podouble
+    /**
+    @param x l'abcisse du point.
+    @param y l'ordonnee du point.
+    @param z l'altitude du point.
     */
    public Point3D(double x,double y,double z){
        this.abscisse=x;
        this.ordonnee=y;
        this.altitude=z;
-   }
-   public Point3D(Point3D A){
-       this.abscisse=A.getAbscisse();
-       this.ordonnee=A.getOrdonnee();
-       this.altitude=A.getAltitude();
    }
    public double getAbscisse(){
        return abscisse;
@@ -47,6 +43,12 @@ public class Point3D {
        String res= "("+abscisse+","+ordonnee+","+altitude+")";
        return res;
    }
+   /**
+    * Calcule de produit vectoriel de AB et AC.
+    * @param B point3D qui définit la droite AB.
+    * @param C point3D qui définit la droite AC.
+    * @return un tableau de 3 double correspondant au vecteur résultat du produit vectoriel.
+    */
    public double[] pVectoriel(Point3D B, Point3D C){
        double[] vecteur = new double[3];
        double x1=B.getAbscisse()-this.getAbscisse();

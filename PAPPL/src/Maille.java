@@ -24,19 +24,28 @@ public class Maille implements Comparable {
         this.altitude = Double.NaN;
         traitee=false;
     }
-
+/**
+ * 
+ * @param P position réelle du point.
+ * @param altitude altitude du point.
+ * @param G grille qui contient toutes les mailles.
+ */
     public Maille(Point2D P, double altitude, Grille G) {
         position = P;
         this.altitude = altitude;
         this.grille = G;
-        //G.ajouterMaille(this, (int)position.getAbscisse()+G.getLargeur()*200, (int)position.getOrdonnee()+G.getHauteur()/2);
         traitee=false;
         maillesDeversees=0;
         estMaxima=false;
         estBassin=false; 
         maximum_drop=0;
     }
-
+/**
+ * Redéfinition de la méthode compareTo pour pouvoir trier une liste de mailles selon leur maximum_drop.
+ * @param O objet avec lequel la comparaison est effectuée.
+ * @return 0 si les maximum_drop sont égaux, 1 si celui de 0 est plus grand, +1 sinon.
+ */
+    @Override
     public int compareTo(Object O) {
         Maille M = (Maille) O;
         if (O==null){
@@ -109,6 +118,11 @@ public class Maille implements Comparable {
         return maximum_drop;
     }
 
+    /**
+     * Calcul du maximum_drop entre la maille instanciée et une deuxième maille.
+     * @param alt altitude de la deuxième maille.
+     * @param facteur 1 si les mailles sont en contact horizontal/vertical, racine(2) sinon.
+     */
     public void calculMaximumDrop(double alt, double facteur)
     {
         maximum_drop=(alt-altitude)/facteur;

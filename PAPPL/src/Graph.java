@@ -15,6 +15,13 @@ public class Graph {
     private int hauteur;
     private int largeur;
 
+    /**
+     * 
+     * @param largeur  nombre de cellules sur l'axe horizontal.
+     * @param hauteur  nombre de cellules sur l'axe vertical.
+     * @param G  grille qui contient les mailles à représenter.
+     * @param param paramètre qui spécifie de quel type de graphique il s'agit (0:altitudes, 1:direction,2:mailles déversantes,3:bassins).
+     */
     public Graph(int largeur, int hauteur, Grille G, int param) {
         this.largeur = largeur;
         this.hauteur = hauteur;
