@@ -17,10 +17,10 @@ public class Point2D {
      */
     private int abs_grille;
     private int ord_grille;
-    
+
     /**
-     @param x l'abcisse du point
-     @param y l'ordonnee du point
+     * @param x l'abcisse du point
+     * @param y l'ordonnee du point
      */
     public Point2D(int x, int y) {
         this.abscisse = x;

@@ -26,12 +26,13 @@ public class Triangle {
         geometry = "";
         G = null;
     }
-/**
- * 
- * @param A premier sommet du triangle.
- * @param B deuxième sommet du triangle.
- * @param C troisième sommet du triangle.
- */
+
+    /**
+     *
+     * @param A premier sommet du triangle.
+     * @param B deuxième sommet du triangle.
+     * @param C troisième sommet du triangle.
+     */
     public Triangle(Point3D A, Point3D B, Point3D C) {
         this.A = A;
         this.B = B;
@@ -59,9 +60,11 @@ public class Triangle {
     public LinkedList<Point2D> getPointInclus() {
         return point_inclus;
     }
-/**
- * Lis l'attribut geometry, qui correspond au polygone de la base de données, et crée les sommets A,B,C en fonction du contenu.
- */
+
+    /**
+     * Lis l'attribut geometry, qui correspond au polygone de la base de
+     * données, et crée les sommets A,B,C en fonction du contenu.
+     */
     public void parseGeometry() {
         String delims = "[ (),]+";
         String[] tokens = geometry.split(delims);
@@ -69,10 +72,12 @@ public class Triangle {
         B = new Point3D(Double.parseDouble(tokens[5]), Double.parseDouble(tokens[6]), Double.parseDouble(tokens[7]));
         C = new Point3D(Double.parseDouble(tokens[8]), Double.parseDouble(tokens[9]), Double.parseDouble(tokens[10]));
     }
-/**
- * Calcule la boite englobante d'un triangle.
- * @return un tableau de 4 double correspondant aux xmin,xmax,ymin,ymax.
- */
+
+    /**
+     * Calcule la boite englobante d'un triangle.
+     *
+     * @return un tableau de 4 double correspondant aux xmin,xmax,ymin,ymax.
+     */
     public double[] BoiteEnglobante() {
         double[] boiteEnglobante = new double[4];
         boiteEnglobante[0] = (Math.min(A.getAbscisse(), Math.min(B.getAbscisse(), C.getAbscisse())));
@@ -81,16 +86,21 @@ public class Triangle {
         boiteEnglobante[3] = (Math.max(A.getOrdonnee(), Math.max(B.getOrdonnee(), C.getOrdonnee())));
         return boiteEnglobante;
     }
-/**
- * Calcule le barycentre du triangle.
- */
+
+    /**
+     * Calcule le barycentre du triangle.
+     */
     private void Barycentre2D() {
         this.G = new Point3D((A.getAbscisse() + B.getAbscisse() + C.getAbscisse()) / 3, (A.getOrdonnee() + B.getOrdonnee() + C.getOrdonnee()) / 3, 0);
     }
-/**
- * Détermine si un point du maillage est à l'intérieur (par projection sur xOy) du triangle .
- * @param P point dont on cherche à savoir s'il est à l'intérieur du triangle .
- */
+
+    /**
+     * Détermine si un point du maillage est à l'intérieur (par projection sur
+     * xOy) du triangle .
+     *
+     * @param P point dont on cherche à savoir s'il est à l'intérieur du
+     * triangle .
+     */
     public void pointInclus(Point2D P) {
         double[] boiteEnglobante = BoiteEnglobante();
         Barycentre2D();
@@ -98,8 +108,8 @@ public class Triangle {
         if (P.getAbscisse() > boiteEnglobante[0] || P.getAbscisse() < boiteEnglobante[1] || P.getOrdonnee() > boiteEnglobante[2] || P.getOrdonnee() < boiteEnglobante[3]) {
             //Droite AB
             if (A.getAbscisse() == B.getAbscisse()) {
-                if (Math.signum(G.getAbscisse()-A.getAbscisse())*Math.signum(P.getAbscisse()-A.getAbscisse())==1 
-                        || Math.signum(G.getAbscisse()-A.getAbscisse())*Math.signum(P.getAbscisse()-A.getAbscisse())==0) {
+                if (Math.signum(G.getAbscisse() - A.getAbscisse()) * Math.signum(P.getAbscisse() - A.getAbscisse()) == 1
+                        || Math.signum(G.getAbscisse() - A.getAbscisse()) * Math.signum(P.getAbscisse() - A.getAbscisse()) == 0) {
                     compteur++;
                 }
             } else {
@@ -112,8 +122,8 @@ public class Triangle {
             }
             //Droite BC
             if (C.getAbscisse() == B.getAbscisse()) {
-                if (Math.signum(G.getAbscisse()-B.getAbscisse())*Math.signum(P.getAbscisse()-B.getAbscisse())==1 
-                        || Math.signum(G.getAbscisse()-B.getAbscisse())*Math.signum(P.getAbscisse()-B.getAbscisse())==0) {
+                if (Math.signum(G.getAbscisse() - B.getAbscisse()) * Math.signum(P.getAbscisse() - B.getAbscisse()) == 1
+                        || Math.signum(G.getAbscisse() - B.getAbscisse()) * Math.signum(P.getAbscisse() - B.getAbscisse()) == 0) {
                     compteur++;
                 }
             } else {
@@ -126,8 +136,8 @@ public class Triangle {
             }
             //Droite AC
             if (C.getAbscisse() == A.getAbscisse()) {
-                if (Math.signum(G.getAbscisse()-A.getAbscisse())*Math.signum(P.getAbscisse()-A.getAbscisse())==1 
-                        || Math.signum(G.getAbscisse()-A.getAbscisse())*Math.signum(P.getAbscisse()-A.getAbscisse())==0) {
+                if (Math.signum(G.getAbscisse() - A.getAbscisse()) * Math.signum(P.getAbscisse() - A.getAbscisse()) == 1
+                        || Math.signum(G.getAbscisse() - A.getAbscisse()) * Math.signum(P.getAbscisse() - A.getAbscisse()) == 0) {
                     compteur++;
                 }
             } else {
@@ -143,11 +153,14 @@ public class Triangle {
             }
         }
     }
-/**
- * Calcule l'altitude d'un point du maillage2D par interpolation avec le triangle.
- * @param P point donc ont cherche l'altitude.
- * @return altitude interpolée du point.
- */
+
+    /**
+     * Calcule l'altitude d'un point du maillage2D par interpolation avec le
+     * triangle.
+     *
+     * @param P point donc ont cherche l'altitude.
+     * @return altitude interpolée du point.
+     */
     public double InterpolationAltitude(Point2D P) {
         double[] vecteur = A.pVectoriel(B, C);
         double altitude;

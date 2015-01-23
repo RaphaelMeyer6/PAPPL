@@ -16,11 +16,11 @@ public class Grille {
     private int largeur;
     private int hauteur;
     private Maille[][] maillage;
-    
+
     /**
-     @param l largeur de la grille.
-     @param h hauteur de la grille.
-     @param pas pas du maillage.
+     * @param l largeur de la grille.
+     * @param h hauteur de la grille.
+     * @param pas pas du maillage.
      */
     public Grille(int l, int h, int pas) {
         this.largeur = l;
@@ -59,8 +59,11 @@ public class Grille {
 
     /**
      * Permet de récupérer les mailles adjacentes à une maille M.
-     * @param M maille dont on cherche les mailles adjacentes(diagonale compris).
-     * @return LinkedList contenant les mailles autour (diagonale compris) de M, se situant dans la grille.
+     *
+     * @param M maille dont on cherche les mailles adjacentes(diagonale
+     * compris).
+     * @return LinkedList contenant les mailles autour (diagonale compris) de M,
+     * se situant dans la grille.
      */
     public LinkedList<Maille> raster(Maille M) {
         LinkedList<Maille> liste_mailles = new LinkedList<>();
@@ -85,9 +88,13 @@ public class Grille {
     }
 
     /**
-     * Méthode récursive privée appelée pour ajouter les mailles se déversant dans chaque maille de la liste d'entrée.
-     * @param liste contient toutes les mailles se déversant dans la maille appelée par calculVersantes.
-     * @return la liste d'entrée, complétée avec les nouvelles mailles se déversant dans les mailles de la liste.
+     * Méthode récursive privée appelée pour ajouter les mailles se déversant
+     * dans chaque maille de la liste d'entrée.
+     *
+     * @param liste contient toutes les mailles se déversant dans la maille
+     * appelée par calculVersantes.
+     * @return la liste d'entrée, complétée avec les nouvelles mailles se
+     * déversant dans les mailles de la liste.
      */
     private LinkedList<Maille> rasterVersantes(LinkedList<Maille> liste) {
         ListIterator<Maille> iterator = liste.listIterator();
@@ -141,7 +148,7 @@ public class Grille {
                     Collections.sort(liste_mailles);
                     int diff_abscisse = (int) liste_mailles.get(0).getPosition().getAbs_grille() - i;
                     int diff_ordonnee = (int) liste_mailles.get(0).getPosition().getOrd_grille() - j;
-                    if (diff_abscisse == 0 && diff_ordonnee == 0 || liste_mailles.get(0).getAltitude()==maillage[i][j].getAltitude()) {
+                    if (diff_abscisse == 0 && diff_ordonnee == 0 || liste_mailles.get(0).getAltitude() == maillage[i][j].getAltitude()) {
                         maillage[i][j].setDirection("X");
                     } else if (diff_abscisse == 1 && diff_ordonnee == 1) {
                         maillage[i][j].setDirection("SE");
@@ -166,7 +173,7 @@ public class Grille {
     }
 
     /**
-     * 
+     *
      * @param i abscisse de la maille.
      * @param j ordonnée de la maille.
      * @return true si la maile est en dehors de la grille, false sinon.
@@ -181,7 +188,9 @@ public class Grille {
 
     /**
      * Calcule le nombre de mailles se déversant dans une maille donnée M.
-     * @param M maille pour laquelle on cherche combien de mailles se déversent à l'intérieur.
+     *
+     * @param M maille pour laquelle on cherche combien de mailles se déversent
+     * à l'intérieur.
      */
     private void calculVersantes(Maille M) {
         LinkedList<Maille> maillesVersantes = new LinkedList<>();
@@ -210,7 +219,8 @@ public class Grille {
     }
 
     /**
-     * Calcule le nombre de mailles se déversant dans chaque maille de la grille.
+     * Calcule le nombre de mailles se déversant dans chaque maille de la
+     * grille.
      */
     public void appelCalculVersantes() {
         for (int j = 0; j < hauteur; j++) {
@@ -219,10 +229,15 @@ public class Grille {
             }
         }
     }
-/**
- * Méthode qui détermine où se trouvent les bassins d'accumulation d'eau. A utiliser après éxécution des méthodes calculDirection et appelCalculVersantes.
- * @param accumulation critère (nombre de cellules déversantes minimum) pour qualifier une cellule de bassin d'accumulation.
- */
+
+    /**
+     * Méthode qui détermine où se trouvent les bassins d'accumulation d'eau. A
+     * utiliser après éxécution des méthodes calculDirection et
+     * appelCalculVersantes.
+     *
+     * @param accumulation critère (nombre de cellules déversantes minimum) pour
+     * qualifier une cellule de bassin d'accumulation.
+     */
     public void trouveBassins(int accumulation) {
         for (int j = 0; j < hauteur; j++) {
             for (int i = 0; i < largeur; i++) {

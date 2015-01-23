@@ -14,8 +14,11 @@ public class DBconnexion {
 
     private Connection con;
     private String dbURL;
+
     /**
-     * Ouvre une connexion vers une base de données à partir d'un driver JDBC postgresql.
+     * Ouvre une connexion vers une base de données à partir d'un driver JDBC
+     * postgresql.
+     *
      * @param url URL de la bse de données, exemple: "localhost/PAPPL".
      * @param login login d'accès à la base de données.
      * @param password mot de passe d'accès à la base de données.
@@ -32,6 +35,7 @@ public class DBconnexion {
             System.err.println("SQLException: " + ex.getMessage());
         }
     }
+
     /**
      * Ferme la connexion avec la base de donnée.
      */
@@ -44,8 +48,10 @@ public class DBconnexion {
             System.err.println("SQLException: " + ex.getMessage());
         }
     }
+
     /**
      * Execute une requete.
+     *
      * @param requete la requete a effectuer.
      * @return LinkedList contenant la première colonne, ligne par ligne.
      */
